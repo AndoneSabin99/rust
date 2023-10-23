@@ -10,6 +10,7 @@ mod amdgpu;
 mod arm;
 mod avr;
 mod bpf;
+mod cheri;
 mod csky;
 mod hexagon;
 mod loongarch;
@@ -811,6 +812,7 @@ impl<'a, Ty> FnAbi<'a, Ty> {
             "avr" => avr::compute_abi_info(self),
             "loongarch64" => loongarch::compute_abi_info(cx, self),
             "m68k" => m68k::compute_abi_info(self),
+            "cheri" => cheri::compute_abi_info(cx, self),
             "csky" => csky::compute_abi_info(self),
             "mips" | "mips32r6" => mips::compute_abi_info(cx, self),
             "mips64" | "mips64r6" => mips64::compute_abi_info(cx, self),

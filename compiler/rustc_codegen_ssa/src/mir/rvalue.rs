@@ -309,7 +309,13 @@ impl<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>> FunctionCx<'a, 'tcx, Bx> {
             (Pointer(..), Int(..)) => bx.ptrtoint(imm, to_backend_ty),
             (F32 | F64, Pointer(..)) => {
                 let int_imm = bx.bitcast(imm, bx.cx().type_isize());
-                bx.inttoptr(int_imm, to_backend_ty)
+                //bx.inttoptr(int_imm, to_backend_ty)
+                let ptr_int = if bx.cx().type_isize() == bx.cx().type_i128() {
+                    bx.trunc(int_imm, bx.cx().type_i64())
+                } else {
+                    int_imm
+                };
+                bx.inttoptr(ptr_int, to_backend_ty)
             }
             (Pointer(..), F32 | F64) => {
                 let int_imm = bx.ptrtoint(imm, bx.cx().type_isize());

@@ -13,6 +13,7 @@ use rustc_data_structures::small_c_str::SmallCStr;
 use rustc_middle::bug;
 use rustc_middle::ty::layout::TyAndLayout;
 use rustc_middle::ty::{self, Ty};
+use rustc_target::abi::HasDataLayout;
 use rustc_target::abi::call::{CastTarget, FnAbi, Reg};
 use rustc_target::abi::{AddressSpace, Align, Integer, Size};
 

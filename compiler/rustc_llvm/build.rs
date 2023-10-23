@@ -177,7 +177,9 @@ fn main() {
     // Link in our own LLVM shims, compiled with the same flags as LLVM
     let mut cmd = Command::new(&llvm_config);
     cmd.arg("--cxxflags");
-    let cxxflags = output(&mut cmd);
+    //let cxxflags = output(&mut cmd);
+    let mut cxxflags = output(&mut cmd);
+    cxxflags.push_str("-I /usr/include/c++/v1");
     let mut cfg = cc::Build::new();
     cfg.warnings(false);
     for flag in cxxflags.split_whitespace() {

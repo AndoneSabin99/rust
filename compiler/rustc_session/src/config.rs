@@ -1252,7 +1252,8 @@ fn default_configuration(sess: &Session) -> CrateConfig {
         (64, layout.i64_align.abi),
         (128, layout.i128_align.abi),
     ] {
-        if i >= min_atomic_width && i <= max_atomic_width {
+        //if i >= min_atomic_width && i <= max_atomic_width {
+        if (i >= min_atomic_width && i <= max_atomic_width) || (max_atomic_width == 64 && i == 128 && wordsz == &"128".to_string() && arch == &"cheri".to_string()) {
             has_atomic = true;
             let mut insert_atomic = |s, align: Align| {
                 ret.insert((sym::target_has_atomic_load_store, Some(Symbol::intern(s))));

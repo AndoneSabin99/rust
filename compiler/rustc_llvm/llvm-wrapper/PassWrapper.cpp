@@ -445,6 +445,10 @@ extern "C" LLVMTargetMachineRef LLVMRustCreateTargetMachine(
   Options.UniqueSectionNames = UniqueSectionNames;
   Options.MCOptions.AsmVerbose = AsmComments;
   Options.MCOptions.PreserveAsmComments = AsmComments;
+  if (strcmp(TripleStr, "cheri-unknown-freebsd") == 0) {
+      Options.MCOptions.ABIName = "purecap";
+  }
+  
   Options.MCOptions.ABIName = ABIStr;
   if (SplitDwarfFile) {
       Options.MCOptions.SplitDwarfFile = SplitDwarfFile;
